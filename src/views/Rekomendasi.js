@@ -3,8 +3,6 @@ import DataTable from 'react-data-table-component'
 import Axios from 'axios'
 import {
   CButton,
-  CButtonGroup,
-  CFormInput,
   CModal,
   CModalBody,
   CModalFooter,
@@ -15,28 +13,20 @@ import {
   CListGroupItem,
   CForm,
 } from '@coreui/react'
-const { useSelector } = require('react-redux')
 
 import '@coreui/coreui/dist/css/coreui.min.css'
 
 const Rekomendasi = () => {
   const [data, setData] = useState([])
   const [rows, setRows] = useState([])
-  const [jurusan, setJurusan] = useState([])
   const [columns, setColumns] = useState()
-  const [fakultas, setFakultas] = useState([])
-  const [id_fakultas, setId_fakultas] = useState(0)
-  const [nama, setNama] = useState('')
-  const [subkriteria, setSubkriteria] = useState([])
   const [subkriteriaDetail, setSubkriteriaDetail] = useState([])
   const [parameter, setParameter] = useState([])
-  const [parametersDetail, setParametersDetail] = useState([])
   const [visible, setVisible] = useState(false)
 
   const [id_subkriteriaNilai, setId_subkriteriaNilai] = useState({})
+  console.log('id_subkriteriaNilai', id_subkriteriaNilai)
   const form = useRef(null)
-
-  const { selected } = useSelector((state) => state.categories)
 
   const getRekomendasiJurusan = async () => {
     const response = await Axios.get(
@@ -47,7 +37,6 @@ const Rekomendasi = () => {
 
     setData((prevState) => response.data.data)
 
-    setJurusan((prevState) => response.data.data)
     setRows(
       response.data.data.map((jurusan) => {
         return {
@@ -60,17 +49,6 @@ const Rekomendasi = () => {
         }
       }),
     )
-  }
-
-  const getSubkriteria = async () => {
-    const response = await Axios.get(`http://localhost:3000/subkriteria`)
-    // console.log(response.data.data)
-    setSubkriteria(response.data.data)
-    const subkriteriaIdNilai = {}
-    response.data.data.forEach((e) => {
-      subkriteriaIdNilai[e.id_subkriteria] = 1
-    })
-    setId_subkriteriaNilai(subkriteriaIdNilai)
   }
 
   const getSubkriteriaDetail = async () => {
@@ -94,11 +72,6 @@ const Rekomendasi = () => {
     setParameter(response.data.data)
   }
 
-  const getFakultas = async () => {
-    const response = await Axios.get(`http://localhost:3000/fakultas`)
-    setFakultas(response.data.data)
-  }
-
   const expandableComponent = (rows) => (
     <CListGroup flush>
       {data
@@ -119,10 +92,8 @@ const Rekomendasi = () => {
   )
 
   useEffect(() => {
-    getSubkriteria()
     getSubkriteriaDetail()
     getParameter()
-    getFakultas()
   }, [])
 
   useEffect(() => {
@@ -142,7 +113,14 @@ const Rekomendasi = () => {
   }, [rows])
   return (
     <>
-      <CButton onClick={() => setVisible(true)} color="success" className="mb-3">
+      <CButton
+        onClick={() => {
+          setVisible(true)
+          getSubkriteriaDetail()
+        }}
+        color="success"
+        className="mb-3"
+      >
         Cari Rekomendasi Jurusan
       </CButton>
       <CModal visible={visible} onClose={() => setVisible(false)}>
@@ -170,12 +148,12 @@ const Rekomendasi = () => {
                               label: e.nama_parameter,
                             }
                           })}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                          id_subkriteriaNilai[subkriteria.id_subkriteria] = parseInt(e.target.value)
                           setId_subkriteriaNilai((prevState) => ({
-                            ...prevState,
-                            [subkriteria.id_subkriteria]: parseInt(e.target.value),
+                            ...id_subkriteriaNilai,
                           }))
-                        }
+                        }}
                       />
                     )
                   })}

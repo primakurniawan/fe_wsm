@@ -162,6 +162,12 @@ const Jurusan = () => {
   }
 
   const editJurusan = async (id) => {
+    const obj = {
+      nama,
+      kriteria: id_subkriteriaNilai,
+      id_fakultas,
+    }
+    console.log('obj', obj)
     const parameters_id = []
     for (const [, value] of Object.entries(id_subkriteriaNilai)) {
       parameters_id.push(value)
