@@ -4,6 +4,7 @@ import './RuteTerpendek.css'
 import axios from 'axios'
 import { CCol, CContainer, CFormSelect, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 
+
 mapboxgl.accessToken =
   'pk.eyJ1IjoicHJpbWFrdXJuaWF3YW4iLCJhIjoiY2wzamVrOHhvMDZyMzNqbzQ1cmt4anJ0ZCJ9.plWxz32egjvGNLpCZL9uVg'
 
@@ -81,7 +82,7 @@ const RuteTerpendek = () => {
     })
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v10',
+      style: 'mapbox://styles/mapbox/navigation-night-v1',
       center: currentCoordinates,
       zoom: 13,
     })
@@ -203,7 +204,7 @@ const RuteTerpendek = () => {
   }
 
   return (
-    <CContainer fluid>
+    <CContainer fluid className="bg-oxford-blue">
       <CRow fluid>
         <CCol xs="3">
           <CFormSelect
@@ -216,11 +217,12 @@ const RuteTerpendek = () => {
             }))}
             onChange={(e) => setIdKursus(parseInt(e.target.value))}
           />
-          <CListGroup flush>
+          <CListGroup flush className="bg-oxford-blue">
             {alamatKursus.length > 0 &&
               alamatKursus.map((eAlamatKursus) => {
                 return (
                   <CListGroupItem
+                    className="bg-oxford-blue-2 cl-white"
                     key={eAlamatKursus.id_alamat_kursus}
                     id={`listing-${eAlamatKursus.id_alamat_kursus}`}
                     active={eAlamatKursus.id_alamat_kursus === activeIdAlamatKursus}
@@ -257,7 +259,7 @@ const RuteTerpendek = () => {
         <CCol xs="6">
           <div id="map" className="map" ref={mapContainer}></div>
         </CCol>
-        <CCol xs="3">
+        <CCol xs="3" className="cl-white">
           {route?.legs?.length > 0 && activeIdAlamatKursus && (
             <>
               <p>
