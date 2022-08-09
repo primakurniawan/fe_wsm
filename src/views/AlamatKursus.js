@@ -14,8 +14,7 @@ import {
   CFormSelect,
 } from '@coreui/react'
 import '@coreui/coreui/dist/css/coreui.min.css'
-
-const Subkriteria = () => {
+const AlamatKursus = () => {
   const [columns, setColumns] = useState()
   const [data, setData] = useState([])
   const [kursus, setKursus] = useState([])
@@ -34,7 +33,7 @@ const Subkriteria = () => {
     lat: 0.0,
   })
 
-  console.log(input)
+  console.log('input', input)
   const getAlamatKursus = async () => {
     const response = await Axios.get(`http://localhost:3000/alamat`)
     const visible = {
@@ -128,6 +127,10 @@ const Subkriteria = () => {
     const response = await Axios.get(`http://localhost:3000/kursus`)
 
     setKursus(response.data.data)
+    setInput((prevInput) => ({
+      ...prevInput,
+      id_kursus: response.data.data[0].id,
+    }))
   }
 
   useEffect(() => {
@@ -481,4 +484,4 @@ const Subkriteria = () => {
   )
 }
 
-export default Subkriteria
+export default AlamatKursus
