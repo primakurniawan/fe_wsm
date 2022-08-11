@@ -4,7 +4,6 @@ import './RuteTerpendek.css'
 import axios from 'axios'
 import { CCol, CContainer, CFormSelect, CListGroup, CListGroupItem, CRow } from '@coreui/react'
 
-
 mapboxgl.accessToken =
   'pk.eyJ1IjoicHJpbWFrdXJuaWF3YW4iLCJhIjoiY2wzamVrOHhvMDZyMzNqbzQ1cmt4anJ0ZCJ9.plWxz32egjvGNLpCZL9uVg'
 
@@ -206,7 +205,13 @@ const RuteTerpendek = () => {
   return (
     <CContainer fluid className="bg-oxford-blue">
       <CRow fluid>
-        <CCol xs="3">
+        <CCol
+          xs="3"
+          style={{
+            height: '100vh',
+            overflow: 'scroll',
+          }}
+        >
           <CFormSelect
             className="mb-3"
             size="sm"
