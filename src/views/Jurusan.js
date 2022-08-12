@@ -191,6 +191,7 @@ const Jurusan = () => {
 
   const getFakultas = async () => {
     const response = await Axios.get(`http://localhost:3000/fakultas`)
+    setId_fakultas(response.data.data[0].id)
     setFakultas(response.data.data)
   }
 
