@@ -53,6 +53,7 @@ const Rekomendasi = () => {
         }
       }),
     )
+    getSubkriteriaDetail()
   }
 
   const getSubkriteriaDetail = async () => {
@@ -118,27 +119,38 @@ const Rekomendasi = () => {
   return (
     <CCol>
       <CContainer>
-      <CRow>
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h4>REKOMENDASI PEMILIHAN JURUSAN</h4>
-          <h6>Sistem Rekomendasi Pemilihan Jurusan di Universitas Sumatera Utara dan Rekomendasi Bimbingan Belajar</h6>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-          <CButton
-        onClick={() => {
-          setVisible(true)
-          getSubkriteriaDetail()
-        }}
-        color="success"
-        className="mb-3 mt-3"
-      >
-        Cari Rekomendasi Jurusan
-      </CButton>
-             </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="https://rawspace.sgp1.digitaloceanspaces.com/youniversity/university/93/universitas-sumatera-utara.jpg" class="img-fluid animated" alt=""></img>
-        </div>
-      </CRow>
+        <CRow>
+          <div
+            class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <h4>REKOMENDASI PEMILIHAN JURUSAN</h4>
+            <h6>
+              Sistem Rekomendasi Pemilihan Jurusan di Universitas Sumatera Utara dan Rekomendasi
+              Bimbingan Belajar
+            </h6>
+            <div class="d-flex justify-content-center justify-content-lg-start">
+              <CButton
+                onClick={() => {
+                  setVisible(true)
+                  getSubkriteriaDetail()
+                }}
+                color="success"
+                className="mb-3 mt-3"
+              >
+                Cari Rekomendasi Jurusan
+              </CButton>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+            <img
+              src="https://rawspace.sgp1.digitaloceanspaces.com/youniversity/university/93/universitas-sumatera-utara.jpg"
+              class="img-fluid animated"
+              alt=""
+            ></img>
+          </div>
+        </CRow>
       </CContainer>
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader onClose={() => setVisible(false)}>
